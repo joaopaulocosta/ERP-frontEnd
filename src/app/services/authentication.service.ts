@@ -17,7 +17,7 @@ export class AuthenticationService {
     public config: any;
     jwtHelper: JwtHelper = new JwtHelper();
 
-    private usuarioLogado = new BehaviorSubject<boolean>(false);
+    public usuarioLogado = new BehaviorSubject<boolean>(false);
 
     constructor(private http: HttpClient,  public storage: StorageService, public router: Router) {
         this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
@@ -40,12 +40,6 @@ export class AuthenticationService {
                                         observe: 'response',
                                         responseType: 'text'
                                     })
-        .subscribe(response => {
-            this.sucessfulLogin(response.headers.get('Authorization'));
-            this.usuarioLogado.next(true);
-            this.router.navigate(['/home']);
-          },
-          error => {})
     }
 
     logout() {

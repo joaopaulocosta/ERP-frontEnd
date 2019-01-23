@@ -2,11 +2,13 @@ import { Component, OnInit, NgModule } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { FormGroup, FormBuilder, Validators   } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  providers: [MessageService]
 })
 
 export class LoginComponent implements OnInit {
@@ -20,6 +22,7 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService,
+    private messageService: MessageService
   ) { 
     if (this.authenticationService.currentUserValue) { 
       this.router.navigate(['/home']);
@@ -48,7 +51,17 @@ export class LoginComponent implements OnInit {
     }
 
     this.loading = true;
-    this.authenticationService.login(this.f.nome.value, this.f.senha.value);
+    this.authenticationService.login(this.f.nome.value, this.f.senha.value)
+                .subscribe(response => {
+                  this.authenticationService.sucessfulLogin(response.headers.get('Authorization'));
+                  this.authenticationService.usuarioLogado.next(true);
+                  this.router.navigate(['/home']);
+                },
+                error => {
+                  this.messageService.add({severity:'error', summary:'Erro', detail:'Usuário ou senha inválidos!'});
+                  this.loading = false;
+                });
+    
 }
 
 }
