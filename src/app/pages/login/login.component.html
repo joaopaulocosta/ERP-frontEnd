@@ -1,0 +1,38 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="container">
+    <div class="box">
+      <div class="ui-g ui-fluid">
+          <div class="ui-g-12 ui-md-4 div-input-login">
+              <div class="ui-inputgroup form-group">
+                    <span class="ui-inputgroup-addon"><i class="pi pi-user"></i></span>
+                    <input formControlName="nome" [ngClass]="{ 'is-invalid': submitted && f.nome.errors }"
+                            type="text" class="form-control ui-inputtext ui-corner-all ui-state-default ui-widget"
+                            pInputText placeholder="Nome">         
+              </div>
+              <div *ngIf="submitted && f.nome.errors" class="invalid-feedback">
+                    <div class="erro-form" *ngIf="f.nome.errors.required">Entre com o nome</div>
+            </div>
+          </div>
+      </div>
+      <div class="ui-g ui-fluid">
+          <div class="ui-g-12 ui-md-4 div-input-login">
+              <div class="ui-inputgroup form-group">
+                    <span class="ui-inputgroup-addon"><i class="pi pi-key"></i></span>
+                    <input formControlName="senha" type="password" 
+                    class=" form-control ui-inputtext ui-corner-all ui-state-default ui-widget"
+                    pInputText placeholder="Senha" [ngClass]="{ 'is-invalid': submitted && f.senha.errors }"   >         
+              </div>
+              <div *ngIf="submitted && f.senha.errors" class="invalid-feedback">
+                    <div class="erro-form" *ngIf="f.senha.errors.required">Entre com a senha</div>
+                </div>
+          </div>
+      </div>
+      <div class="ui-g ui-fluid">
+          <div class="ui-g-12 ui-md-4 div-input-login">
+                <button [disabled]="loading" pButton label="Login" ></button> 
+                <img *ngIf="loading" id="img-loader" class="pl-3" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" /> 
+          </div>
+      </div>
+    </div>  
+    </div>
+</form>
